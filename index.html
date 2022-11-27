@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Codex Mysterios</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <main>
+    <header>
+      <h1>Codex Mysterios</h1>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+    <section class="ui">
+      <aside class="sidebar">
+        <ul>
+          <li>Tiles</li>
+          <li>Data</li>
+          <li>Tools</li>
+      </aside>
+      <article class="view">
+        <div class="tiles">
+          <div><label>Tile X</label><input type="text" class="tile-x" value="0" /></div>
+          <div><label>Tile Y</label><input type="text" class="tile-y" value="0" /></div>
+        <canvas id="cnv_preview" class="tile" width="32" height="32"></canvas>
+        </div>
+        <div class="data">data</div>
+        <div class="tools">tools</div>
+      </article>
+
+    </section>
+  </main>
+
+
+
+
+
+  <script src="script.js" type="module"></script>
+
+  <!--
+  This script places a badge on your repl's full-browser view back to your repl's cover
+  page. Try various colors for the theme: dark, light, red, orange, yellow, lime, green,
+  teal, blue, blurple, magenta, pink!
+  -->
+  <script src="https://replit.com/public/js/replit-badge.js" theme="blue" defer></script>
+</body>
+
+</html>

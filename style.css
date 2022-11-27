@@ -1,0 +1,40 @@
+html, body {
+  height: 100%;
+  width: 100%;
+  background-color: tan;
+}
+nav ul {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+nav ul li {
+  display: inline-block;
+  padding: 0.5em;
+  margin: 0;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  background: #fff;
+  color: #333;
+}
+.sidebar {
+  border: 1px solid black;
+}
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar ul li {
+  border: 1px solid blue;
+}
+.ui {
+  display: flex;
+}
+
+canvas {
+  border: 1px solid black;
+}
