@@ -23,6 +23,12 @@ const renderTile = () => {
     data.ctx.drawImage(data.img, data.currTileX * data.tileWidth, data.currTileY * data.tileHeight, data.tileWidth, data.tileHeight, 0, 0, data.tileWidth, data.tileHeight);
   }
 }
+const bindEvents = () => {
+  const inputX = document.getElementById('inputX');
+  const inputY = document.getElementById('inputY');
+  inputX.addEventListener('change', (e) => { data.currTileX = e.target.value });
+  inputY.addEventListener('change', (e) => { data.currTileY = e.target.value });
+}
 
 watch(renderTile);
 
@@ -41,4 +47,6 @@ window.addEventListener("DOMContentLoaded", () => {
     data.currTileX = 1;
     data.currTileY = 1;
   }
+
+  bindEvents();
 })
