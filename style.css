@@ -38,3 +38,17 @@ nav ul li {
 canvas {
   border: 1px solid black;
 }
+
+.pnl {
+ display: none; 
+}
+
+ul .pnl-choosers {
+  display: flex;
+  flex-direction: column;
+}
+.pnl-chooser {
+  cursor: pointer;
+  padding; 18px;
+  display: block;
+}
