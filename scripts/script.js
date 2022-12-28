@@ -2,8 +2,9 @@
 // created by Andrew Wooldridge triptych@gmail.com
 
 import { reactive, html, watch } from 'https://cdn.skypack.dev/@arrow-js/core';
-import gameData from './data/data.json' assert {type: 'json'};
+import gameData from '../data/data.json' assert { type: 'json' };
 console.log(gameData);
+// import {renderedCard} from './card.js';
 
 const data = reactive({
   tileWidth: 32, // pixels
@@ -14,7 +15,7 @@ const data = reactive({
   currTileY: 0, // current Y coord
   img: null, // image
   ctx: null, // canvas context
-  currPanel:"tiles" // current panel
+  currPanel: "tiles" // current panel
 })
 
 
@@ -38,9 +39,9 @@ const bindEvents = () => {
     pnl.addEventListener('click', (e) => {
       console.log('click', e.target.id);
       data.currPanel = e.target.getAttribute('data-link');
-      
+
     });
-  
+
   });
 }
 
@@ -56,24 +57,26 @@ const renderPanels = () => {
     pnl.style.display = "none";
   })
   switch (data.currPanel) {
-      case 'tiles':
+    case 'tiles':
       document.querySelector('.pnl.tiles').style.display = "block";
-        break;
-      case 'data':
-        document.querySelector('.pnl.data').style.display = "block";
-        break;
-      case 'tools':
+      break;
+    case 'data':
+      document.querySelector('.pnl.data').style.display = "block";
+      break;
+    case 'tools':
       document.querySelector('.pnl.tools').style.display = "block";
-        break;
-      default:
-        console.log('renderPanels', data.currPanel)
-        break;
-  
+      break;
+    default:
+      console.log('renderPanels', data.currPanel)
+      break;
+
   }
 }
 
 watch(renderTile);
 watch(renderPanels);
+
+// renderedCard(document.body)
 
 window.addEventListener("DOMContentLoaded", () => {
   const canvas = document.getElementById("cnv_preview");
@@ -92,4 +95,10 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 
   bindEvents();
-})
+  renderPanels();
+  renderTile();
+
+});
+
+// temp code
+
