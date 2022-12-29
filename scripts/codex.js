@@ -14,7 +14,8 @@ const state = reactive({
   currTileY: 0, // current Y coord
   img: null, // image
   ctx: null, // canvas context
-  currPanel: "tiles" // current panel
+  currPanel: "tiles", // current panel
+  data: null // state of the app
 });
 
 const largerCanvas = () => {
@@ -56,6 +57,7 @@ const init = () => {
     state.currTileX = 1;
     state.currTileY = 1;
   }
+  state.data = gameData;
 
 }
 
@@ -74,20 +76,31 @@ const renderNav = () => {
 `(document.getElementsByClassName('nav')[0]);
 }
 
-
-
-const renderLargerCanvas = () => {
-  // const tgt = document.getElementsByClassName('zoom')[0];
-  // const cnv = largerCanvas();
-  // tgt.innerHTML = '';
-  // tgt.appendChild(cnv);
+const renderCard = () => {
+  console.log('renderCard', state.currTileX, state.currTileY)
+  console.log('state.data', state.data)
+  console.log('state at ', state.data.data)
+  html`
+    <div class="tile">
+    <div class="tile-name">
+     Name: <span>${()=> state.data.data.tiles[state.currTileX][state.currTileY].name}</span>
+        
+    </div>
+      <div class="tile-description">
+        Description:
+        <p>${()=> state.data.data.tiles[state.currTileX][state.currTileY].description}</p>
+      </div>
+  `(document.getElementsByClassName('card')[0]);  
 }
-// watch(renderNav);
+
+
+
 // start things off when page is ready
 
 window.addEventListener("DOMContentLoaded", () => {
   init();
   renderNav();
+  renderCard();
   //largerCanvas();
 
 
