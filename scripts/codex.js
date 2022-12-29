@@ -42,6 +42,21 @@ const renderTile = () => {
 }
 watch(renderTile);
 
+
+// render an editor view of the name, description, tags
+const renderEditor = () => {
+  console.log('renderEditor', state.currTileX, state.currTileY);
+  if (state && state.data) {
+
+
+    const name = document.getElementById('inputName');
+    const description = document.getElementById('inputDescription');
+    name.value = state.data.data.tiles[state.currTileX][state.currTileY].name;
+    description.value = state.data.data.tiles[state.currTileX][state.currTileY].description;
+  }
+}
+watch(renderEditor);
+
 const init = () => {
   const canvas = document.getElementById("cnv_preview");
   console.log(canvas);
@@ -63,7 +78,7 @@ const init = () => {
 
 const renderNav = () => {
   html`
-<div> x: ${() => state.currTileX} of ${()=> state.numTilesX} y: ${() => state.currTileY} of ${()=>state.numTilesY} </div>
+<div> x: ${() => state.currTileX} of ${() => state.numTilesX} y: ${() => state.currTileY} of ${() => state.numTilesY} </div>
 <div> <button @click="${e => state.currTileY--}">🔼</button> 
    </div>
 <div> 
@@ -83,17 +98,38 @@ const renderCard = () => {
   html`
     <div class="tile">
     <div class="tile-name">
-     Name: <span>${()=> state.data.data.tiles[state.currTileX][state.currTileY].name}</span>
+     Name: <span>${() => state.data.data.tiles[state.currTileX][state.currTileY].name}</span>
         
     </div>
       <div class="tile-description">
         Description:
-        <p>${()=> state.data.data.tiles[state.currTileX][state.currTileY].description}</p>
+        <p>${() => state.data.data.tiles[state.currTileX][state.currTileY].description}</p>
       </div>
-  `(document.getElementsByClassName('card')[0]);  
+  `(document.getElementsByClassName('card')[0]);
 }
 
+const bindEvents = () => {
+  document.getElementById('btnExport').addEventListener('click', () => {
+    const fileName = 'export.json';
+    const blob = new Blob([JSON.stringify(state.data)], { type: 'application/json' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = fileName;
+    a.click();
+    window.URL.revokeObjectURL(url);
 
+  });
+
+  document.getElementById('btnSave').addEventListener('click', () => {
+    console.log('save');
+    console.log(document.getElementById('inputName').value);
+    state.data.data.tiles[state.currTileX][state.currTileY].name = document.getElementById('inputName').value;
+    state.data.data.tiles[state.currTileX][state.currTileY].description = document.getElementById('inputDescription').value;
+    //state.data.save();
+  
+  });
+}
 
 // start things off when page is ready
 
@@ -101,7 +137,7 @@ window.addEventListener("DOMContentLoaded", () => {
   init();
   renderNav();
   renderCard();
-  //largerCanvas();
-
+  renderEditor();
+  bindEvents()
 
 });
