@@ -17,6 +17,17 @@ const state = reactive({
   currPanel: "tiles" // current panel
 });
 
+const largerCanvas = () => {
+  const srccanvas = document.getElementById("cnv_preview");
+  const canvas = document.getElementById('cnv_zoom');
+  canvas.width = srccanvas.width * 4;
+  canvas.height = srccanvas.height * 4;
+  let ctx = canvas.getContext('2d');
+  //ctx.scale(2, 2);
+  ctx.drawImage(srccanvas, 0, 0, canvas.width, canvas.height);
+  return canvas;
+}
+
 // render a tile into the state's canvas
 
 const renderTile = () => {
@@ -26,6 +37,7 @@ const renderTile = () => {
     state.ctx.clearRect(0, 0, state.tileWidth, state.tileHeight);
     state.ctx.drawImage(state.img, state.currTileX * state.tileWidth, state.currTileY * state.tileHeight, state.tileWidth, state.tileHeight, 0, 0, state.tileWidth, state.tileHeight);
   }
+  largerCanvas();
 }
 watch(renderTile);
 
@@ -47,9 +59,36 @@ const init = () => {
 
 }
 
+const renderNav = () => {
+  html`
+<div> x: ${() => state.currTileX} of ${()=> state.numTilesX} y: ${() => state.currTileY} of ${()=>state.numTilesY} </div>
+<div> <button @click="${e => state.currTileY--}">🔼</button> 
+   </div>
+<div> 
+  <button @click="${e => state.currTileX--}">◀</button> | 
+  <button @click="${e => state.currTileX++}">▶</button>
+</div>
+<div>
+  <button @click="${e => state.currTileY++}">🔽</button>
+</div>
+`(document.getElementsByClassName('nav')[0]);
+}
 
+
+
+const renderLargerCanvas = () => {
+  // const tgt = document.getElementsByClassName('zoom')[0];
+  // const cnv = largerCanvas();
+  // tgt.innerHTML = '';
+  // tgt.appendChild(cnv);
+}
+// watch(renderNav);
 // start things off when page is ready
 
 window.addEventListener("DOMContentLoaded", () => {
   init();
-})
+  renderNav();
+  //largerCanvas();
+
+
+});
