@@ -2,7 +2,7 @@
 // created by Andrew Wooldridge triptych@gmail.com
 
 import { reactive, html, watch } from 'https://cdn.skypack.dev/@arrow-js/core';
-import gameData from '../data/data.json' assert { type: 'json' };
+import gameData from '../data/export.json' assert { type: 'json' };
 console.log(gameData);
 
 const state = reactive({
