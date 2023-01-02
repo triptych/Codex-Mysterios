@@ -76,17 +76,40 @@ const init = () => {
 
 }
 
+
+const saveState = () => {
+  console.log('save');
+  console.log(document.getElementById('inputName').value);
+  state.data.data.tiles[state.currTileX][state.currTileY].name = document.getElementById('inputName').value;
+  state.data.data.tiles[state.currTileX][state.currTileY].description = document.getElementById('inputDescription').value;
+}
+
 const renderNav = () => {
   html`
 <div> x: ${() => state.currTileX} of ${() => state.numTilesX} y: ${() => state.currTileY} of ${() => state.numTilesY} </div>
-<div> <button @click="${e => state.currTileY--}">🔼</button> 
+<div> <button @click="${e => {
+      saveState();
+      state.currTileY--;
+
+    }}">🔼</button> 
    </div>
 <div> 
-  <button @click="${e => state.currTileX--}">◀</button> | 
-  <button @click="${e => state.currTileX++}">▶</button>
+  <button @click="${e => {
+      saveState();
+      state.currTileX--;
+      //saveState();
+    }}">◀</button> | 
+  <button @click="${e => {
+      saveState();
+      state.currTileX++;
+      //saveState();
+    }}">▶</button>
 </div>
 <div>
-  <button @click="${e => state.currTileY++}">🔽</button>
+  <button @click="${e => {
+      state.currTileY++;
+      //saveState();
+    }}">🔽</button>
 </div>
 `(document.getElementsByClassName('nav')[0]);
 }
@@ -122,12 +145,9 @@ const bindEvents = () => {
   });
 
   document.getElementById('btnSave').addEventListener('click', () => {
-    console.log('save');
-    console.log(document.getElementById('inputName').value);
-    state.data.data.tiles[state.currTileX][state.currTileY].name = document.getElementById('inputName').value;
-    state.data.data.tiles[state.currTileX][state.currTileY].description = document.getElementById('inputDescription').value;
+    saveState()
     //state.data.save();
-  
+
   });
 }
 
